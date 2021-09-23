@@ -1,0 +1,41 @@
+python3 -m venv venv
+source venv/bin/activate # En ubuntu, en windows es similar
+
+Puede que solicite instalar modulo venv
+
+Se recomienda crear este archivo para compartir
+pip list > requeriments.txt
+
+
+Windows:
+
+0.- Entras a CMD.
+1.- Entras a tu carpeta con el comando cd.
+2.- Ingresa el comando “py -m pip install virtualenv”.
+3.- Pones el comando py -m venv nombre_de_tu_espacio_virtual".
+4.- Colocas "nombre_de_tu_espacio_virtual\Scripts\activate"
+5.- Por último, tipeas “pip install nombre_de_librería” en este caso, el nombre de la librería que queremos en “bokeh”.
+
+Si no te funciona, prueba colocar “python” en lugar de “py
+
+
+Algunos comandos de pip:
+
+search: busca un paquete
+pip search <package>
+
+install: instala un paquete
+pip install <package>
+
+show: muestra detalles del paquete instalado
+pip show <package>
+
+uninstall: eliminar un paquete
+pip uninstall <package>
+
+list: retorna la lista de paquetes en el ambiente actual
+pip list
+
+freeze: se utiliza para congelar los paquetes y su versión actual.
+pip freeze
+
