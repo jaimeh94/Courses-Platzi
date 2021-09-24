@@ -430,13 +430,14 @@ print(f'Day: {my_day.day}')
 
 Tabla de códigos de formato para fechas y horas(los más importantes):
 
-|Formato	|Código|
-|Año	|%Y|
-|Mes	|%m|
-|Día	|%d|
-|Hora	|%H|
-|Minutos	|%M|
-|Segundos	|%S|
+| Formato  | Código |
+| -------- | ------ |
+| Año      | %Y     |
+| Mes      | %m     |
+| Día      | %d     |
+| Hora     | %H     |
+| Minutos  | %M     |
+| Segundos | %S     |
 
 ```
 from datetime import datetime
