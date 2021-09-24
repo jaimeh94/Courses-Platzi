@@ -25,7 +25,8 @@ Al escribir una o mas variables en esta region, estas podrán ser accesibles des
 ### Nested functinos
 Son funciones dentro de otra función.
 
-```def main():
+```
+def main():
 		a = 1
 
 		def nested():
@@ -34,9 +35,11 @@ Son funciones dentro de otra función.
 		nested()
 main()
 
-// 1```
+// 1
+```
 
-```def main():
+```
+def main():
 		a = 1
 
 		def nested():
@@ -47,13 +50,15 @@ main()
 my_func =  main()
 my_func()
 
-// 1```
+// 1
+```
 
 ### Clousure
 
 Se da cuando una variable que está en un scope superior es recordada por una función que está en un scope inferior, aunque el scope superior sea eliminado.
 
-```def main():
+```
+def main():
 		a = 1
 
 		def nested():
@@ -69,7 +74,8 @@ del(main)
 my_func()
 
 // 1
-// 1```
+// 1
+```
 
 Reglas para encontrar un clousure
 ---
@@ -77,7 +83,8 @@ Reglas para encontrar un clousure
 * La nested function debe referenciar un valor de un scope superior.
 * La función que envuelve a la nested function debe retornarla también.
 
-```def make_multiplier(x):
+```
+def make_multiplier(x):
 		
 		def multiplier(n):
 				return x * n
@@ -93,7 +100,8 @@ print(times10(times4(2)))
 
 // 30
 // 20
-// 80```
+// 80
+```
 Donde aparecen los closures?
 ---
 En clases cortas y cuando trabajamos con decoradores.
@@ -293,7 +301,8 @@ Al set no se puede acceder con un índice.
 
 Para declarar un set, el grupo de elementos debe ir entre llaves. Se diferencia de los diccionarios ya que no contienen el símbolo “:”, por lo que automáticamente Python lo entiende como un set de datos.
 
-```# set de enteros
+```
+# set de enteros
 my_set = {1, 3, 5}
 print(my_set)
 
@@ -320,7 +329,8 @@ Existen 4 métodos:
 .pop() = Elimina un elemento del set de manera aleatoria.
 .clear() = Limpia el set completo.
 
-```#ejemplo de operaciones sobre sets 
+```
+#ejemplo de operaciones sobre sets 
 my_set = {1, 2, 3} 
 print(my_set) #Output {1, 2, 3} 
 
