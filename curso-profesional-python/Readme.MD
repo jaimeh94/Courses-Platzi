@@ -324,10 +324,10 @@ Para agregar un solo elemento se utiliza el método .add de los sets, en cambio,
 Eliminando elementos de un Set
 Existen 4 métodos:
 
-.discard() = Se indica como parámetro el elemento a eliminar, en caso de no exisitir el elemento no realiza ninguna operación y continúa con la ejecución.
-.remove() = También se indica como parámetro el elemento a eliminar, pero en este caso si no exististe el elemento arroja un error (KeyError) y detiene la ejecución.
-.pop() = Elimina un elemento del set de manera aleatoria.
-.clear() = Limpia el set completo.
+* `.discard()` = Se indica como parámetro el elemento a eliminar, en caso de no exisitir el elemento no realiza ninguna operación y continúa con la ejecución.
+* `.remove()` = También se indica como parámetro el elemento a eliminar, pero en este caso si no exististe el elemento arroja un error (KeyError) y detiene la ejecución.
+* `.pop()` = Elimina un elemento del set de manera aleatoria.
+* `.clear()` = Limpia el set completo.
 
 ```
 #ejemplo de operaciones sobre sets 
@@ -365,7 +365,8 @@ print(my_set)  #output {1, 2, 3, 4, 5}
 #usando tuplas para crear sets 
 my_tuple: ('hola', 'hola', 1, 2)
 my_set2: set(my_tuple)
-print(my_set2) #Output {'hola', 1}```
+print(my_set2) #Output {'hola', 1}
+```
 
 ### Operaciones con Sets
 #### Unión
