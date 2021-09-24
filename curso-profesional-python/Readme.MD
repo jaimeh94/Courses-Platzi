@@ -4,7 +4,7 @@
 
 Para utilizar mypy vamos a ejecutar el archivo así:
 
-`mypy palindrome.py` --check-untyped-defs
+```mypy palindrome.py``` --check-untyped-defs
 
 este flag nos perdimete ver cuando se esta ejecuntando algo con un tipo de parámetro que no corresponde
 
@@ -25,7 +25,7 @@ Al escribir una o mas variables en esta region, estas podrán ser accesibles des
 ### Nested functinos
 Son funciones dentro de otra función.
 
-`def main():
+```def main():
 		a = 1
 
 		def nested():
@@ -34,9 +34,9 @@ Son funciones dentro de otra función.
 		nested()
 main()
 
-// 1`
+// 1```
 
-`def main():
+```def main():
 		a = 1
 
 		def nested():
@@ -47,13 +47,13 @@ main()
 my_func =  main()
 my_func()
 
-// 1`
+// 1```
 
 ### Clousure
 
 Se da cuando una variable que está en un scope superior es recordada por una función que está en un scope inferior, aunque el scope superior sea eliminado.
 
-`def main():
+```def main():
 		a = 1
 
 		def nested():
@@ -69,7 +69,7 @@ del(main)
 my_func()
 
 // 1
-// 1`
+// 1```
 
 Reglas para encontrar un clousure
 ---
@@ -77,7 +77,7 @@ Reglas para encontrar un clousure
 * La nested function debe referenciar un valor de un scope superior.
 * La función que envuelve a la nested function debe retornarla también.
 
-`def make_multiplier(x):
+```def make_multiplier(x):
 		
 		def multiplier(n):
 				return x * n
@@ -93,14 +93,14 @@ print(times10(times4(2)))
 
 // 30
 // 20
-// 80`
+// 80```
 Donde aparecen los closures?
 ---
 En clases cortas y cuando trabajamos con decoradores.
 
 ## Decoradores 
 Un decorador es una función que recibe como parámetro otra función, le añade cosas y retorna una función diferente. Tienen la misma estructura que los Closures pero en vez de variables lo que se envía es una función. Ejemplo:
-`
+```
 def decorador(func):
     def envoltura():
         print("Esto se añade a mi función original.")
@@ -119,9 +119,9 @@ saludo()                   # La función saludo está ahora decorada
 # Salida:
 # Esto se añade a mi función original.
 # ¡Hola!
-`
+```
 Se puede hacer de manera mas sencilla, con azúcar sintáctica (sugar syntax): Cuando tenemos un código que está embellecido para que nosotros lo veamos de una manera más estática, ayudando a entender de manera mas sencilla el código. De esta manera, tenemos el código anterior:
-`
+```
 def decorador(func):
     def envoltura():
         print("Esto se añade a mi función original.")
@@ -133,8 +133,8 @@ def saludo():
 saludo = decorador(saludo) # Se guarda la función decorada en la variable saludo (se decora)
 
 saludo()                   # La función saludo está ahora decorada 
-`
-`
+```
+```
 def decorador(func):
     def envoltura():
         print("Esto se añade a mi función original.")
@@ -147,9 +147,9 @@ def saludo():
     print("¡Hola!")
 
 saludo()                   # La función saludo está ahora decorada 
-`
+```
 Esto permite ahorrar código al implementar características (decoradores) comunes a diferentes funciones:
-`
+```
 def decorator_upper(func):                  # Función decoradora
     def wrapper(text):                      # Función anidada
         return func(text).upper()           # Operación que realiza el decorado a la función (func), inserta el texto a la función original. Convierte todo a mayúsculas.
@@ -165,7 +165,7 @@ def warning(name):
 
 print(message("Cesar")) # Output: CESAR, RECIBISTE UN MENSAJE
 print(warning("Cesar")) # Output: USA SOLO MAYÚSCULAS CESAR
-`
+```
 
 ## Iteradores
 Son una estructura de datos para guardar datos infinitos.
@@ -173,7 +173,7 @@ Son una estructura de datos para guardar datos infinitos.
 Los iterables son los objetos que podemos recorrer a través de un ciclo dicho de otra manera, son estructuras de datos divisibles en elementos que puedo recorrer en un ciclo.
 
 Todos los iterables pueden convertirse en iteradores. De esta manera es que internamente Python los puede recorrer realmente, esto mediante parsing usando el comando iter.
-`
+```
 # Creando un iterador
 my_list = [1, 2, 3, 4, 5]
 my_iter = iter(my_list)
@@ -182,10 +182,10 @@ my_iter = iter(my_list)
 print(next(my_iter)) # Next nos permite acceder al siguiente elemento del iterador por cada llamada 
 
 # Cuando no quedan datos, la excepción StopIteration es elevada
-`
+```
 
 Si queremos crear un código que nos permita recorrer todos los elementos de nuestra lista usando la función next para como aparece en el ejemplo anterior, tendríamos que realizar un bloque try-except:
-`
+```
 # Creando un iterador
 my_list = [1, 2, 3, 4, 5]
 my_iter = iter(my_list)
@@ -197,21 +197,21 @@ while True:
 		print(next(my_iter)) # Next nos permite acceder al siguiente elemento del iterador por cada llamada 
 	except StopIteration:
 		break                # Salimos del ciclo una vez que obtenemos el último valor iterable
-`
+```
 Lo anterior es posible hacerlo de una manera mucho más sencilla, mediante el ciclo for el cual es azúcar sintáctica pues facilita y realiza de una manera mas estética y sencilla una operación:
-`
+```
 my_list = [1, 2, 3, 4, 5]
 
 for element in my_list
 	print ("element")
-`
+```
 Es posible crear un iterador personalizado (directamente, sin castear/casting) el cual nos permita recorrer un infinito número de elementos de acuerdo a una función dada, utiliza dos métodos internos importantes: “iter” y “next”.
 
 El uso de una función que determina los valores a iterar nos permite ahorrar memoria y trabajar más rápido, pues no tenemos que almacenar cada uno de los valores, sino solo una función para extraer cada uno de los elementos.
 
 El siguiente ejemplo crea un iterador que recorre todos los números pares:
 
-`
+```
 class EvenNumbers:
   """Clase que implementa un iterador de todos los números pares,
   o los números pares hasta un máximo que definimos
@@ -234,11 +234,11 @@ class EvenNumbers:
       return result
     else:
       raise StopIteration
-`
+```
 
 ## Generadores
 Sugar syntax de los iteradores. Los generadores son funciones que guardan un estado. Es un iterador escrito de forma más simple.
-`
+```
 def my_gen():
 
   """un ejemplo de generadores"""
@@ -261,19 +261,19 @@ print(next(a)) # Hello world!
 print(next(a)) # Hello heaven!
 print(next(a)) # Hello hell!
 print(next(a)) StopIteration
-`
+```
 yield es una palabra reservada similar a return, pero en lugar de terminar la función, yield la pausa, es decir que si la función se vuelve a llamar, esta comienza desde donde se llamó al ultimo yield.
 
 Ahora veremos un generator expression (es como list comprehension pero mucho mejor, porque podemos manejar mucha cantidad
 de información sin tener problemas de rendimiento):
-`
+```
 #Generator expression
 
 my_list = [0,1,4,7,9,10]
 
 my_second_list = [x**2 for x in my_list] #List comprehension
 my_second_gen = (x**2 for x in my_list) #Generator expression
-`
+```
 Como se puede ver en el ejemplo, la diferencia en la sintaxis únicamente es en el uso de paréntesis en lugar del uso de corchetes.
 
 Ventajas de los Generadores:
@@ -293,14 +293,14 @@ Al set no se puede acceder con un índice.
 
 Para declarar un set, el grupo de elementos debe ir entre llaves. Se diferencia de los diccionarios ya que no contienen el símbolo “:”, por lo que automáticamente Python lo entiende como un set de datos.
 
-`# set de enteros
+```# set de enteros
 my_set = {1, 3, 5}
 print(my_set)
 
 # set de diferentes tipos de datos
 my_set = {1.0, "Hi", (1, 4, 7)}
 print(my_set)
-`
+```
 
 En caso de desear declarar un set vacío no es posible usar llaves ya que al no contener datos entre las llaves las interpreta como un diccionario. En este caso la declaración de un set debe ser explicita mediante el comando set()
 
@@ -320,7 +320,7 @@ Existen 4 métodos:
 .pop() = Elimina un elemento del set de manera aleatoria.
 .clear() = Limpia el set completo.
 
-`#ejemplo de operaciones sobre sets 
+```#ejemplo de operaciones sobre sets 
 my_set = {1, 2, 3} 
 print(my_set) #Output {1, 2, 3} 
 
@@ -343,10 +343,10 @@ print(my_set) #Output el set menos un elemento aleatorio
 #limpiar el set 
 my_set.clear()
 print(my_set) # Output set() 
-`
+```
 
 Podemos utilizar estructuras de datos existentes para transformarlas a sets utilizando el método set:
-`
+```
 #usando listas para crear sets
 my_list = [1, 2, 3, 3, 4, 5]
 my_set = set(my_list)
@@ -355,53 +355,53 @@ print(my_set)  #output {1, 2, 3, 4, 5}
 #usando tuplas para crear sets 
 my_tuple: ('hola', 'hola', 1, 2)
 my_set2: set(my_tuple)
-print(my_set2) #Output {'hola', 1}`
+print(my_set2) #Output {'hola', 1}```
 
 ### Operaciones con Sets
 #### Unión
 Resultado de juntar todos los elementos que tienen ambos, combinar ambos sets
-`
+```
 set_1 = {1, 2, 3}
 set_2 = {3, 4, 5}
 set_3 = set_1 | set_2 #  -> {1, 2, 3, 4, 5}
 
 # O de forma mas explicita
 set_1.union(set_2) #  -> {1, 2, 3, 4, 5}
-`
+```
 #### Intersección
 Los que se repiten en ambos sets
-`
+```
 set_1 = {1, 2, 3}
 set_2 = {3, 4, 5}
 set_3 = set_1 & set_2 #  -> {3}
 
 # O de forma mas explicita
 set_1.intersection(set_2) #  -> {3}
-`
+```
 #### Diferencia
 Tomar dos sets y de uno quitarle todos los elementos que tiene el otro
-`
+```
 set_1 = {1, 2, 3}
 set_2 = {3, 4, 5}
 set_3 = set_1 - set_2 #  -> {1, 2}
 
 # O de forma mas explicita
 set_1.difference(set_2) #  -> {1, 2}
-`
+```
 #### Diferencia Simétrica
 Tomar todos los elementos exceptos los que se repiten
-`
+```
 set_1 = {1, 2, 3}
 set_2 = {3, 4, 5}
 set_3 = set_1 ^ set_2 #  -> {1, 2, 4, 5}
 
 # O de forma mas explicita
 set_1.symmetric_difference(set_2) #  -> {1, 2, 4, 5}
-`
+```
 
 ## Manejo de fechas
 datetime es un módulo de manejo de fechas.
-`
+```
 import datetime
 
 my_time = datetime.datetime.now() # hora local de mi PC u hora universal
@@ -415,7 +415,7 @@ print(my_date)
 print(f'Year: {my_day.year}')
 print(f'Month: {my_day.month}')
 print(f'Day: {my_day.day}')
-`
+```
 
 Tabla de códigos de formato para fechas y horas(los más importantes):
 
@@ -427,7 +427,7 @@ Tabla de códigos de formato para fechas y horas(los más importantes):
 |Minutos	|%M|
 |Segundos	|%S|
 
-`
+```
 from datetime import datetime
 
 my_datetime = datetime.now()
@@ -444,5 +444,5 @@ print(f'Formato random: {random_format}')
 
 formato_utc = datetime.utcnow()
 print(f'Formato UTC: {formato_utc}')
-`
+```
 Más comandos [aquí](https://docs.python.org/es/3/library/datetime.html#strftime-and-strptime-format-codes)
