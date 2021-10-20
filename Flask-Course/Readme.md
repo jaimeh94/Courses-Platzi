@@ -96,3 +96,144 @@ def hello():
 ```
 
 * Para activar un servidor y correr la aplicación podemos ejecutar el comando `flask run`. No sin antes declarar la variable `FLASK_APP` así `export FLASK_APP=main.py`
+
+* Ya podemos ingresar a la dirección IP del servidor y veremos el mesaje decrito en la función
+
+![](./images/hello.PNG)
+
+## Debuggin en Flask
+
+Debugging: es el proceso de identificar y corregir errores de programación.
+
+Para activar el *debug mode* escribir lo siguiente en la consola:
+```
+export FLASK_DEBUG=1
+echo $FLASK_DEBUG
+```
+Logging: es una grabación secuencial en un archivo o en una base de datos de todos los eventos que afectan a un proceso particular.
+
+Se utiliza en muchos casos distintos, para guardar información sobre la actividad de sistemas variados.
+
+Tal vez su uso más inmediato a nuestras actividades como desarrolladores web sería el logging de accesos al servidor web, que analizado da información del tráfico de nuestro sitio. Cualquier servidor web dispone de logs con los accesos, pero además, suelen disponer de otros logs, por ejemplo, de errores.
+
+Los sistemas operativos también suelen trabajar con logs, por ejemplo para guardar incidencias, errores, accesos de usuarios, etc.
+
+A través de el logs se puede encontrar información para detectar posibles problemas en caso de que no funcione algún sistema como debiera o se haya producido una incidencia de seguridad.
+
+---
+Otra opción para correr el servidor en modo debug es poner estas lineas al final del archivo main.py:
+```
+if __name__ == '__main__':
+    app.run(debug=True)
+```    
+y correr main.py desde la terminal:
+```
+python main.py 
+```
+
+---
+
+**Aporte de comentarios**
+Una vez que hayas levantado todo tu servidor a mano, posteriormente lo puedes automatizar así:
+```
+#!/bin/bash
+
+source venv/bin/activate
+
+export FLASK_APP=main.py
+export FLASK_DEBUG=1
+
+flask run
+```
+1. Copia el código en un nuevo archivo dentro de la raíz de tu proyecto
+2. Guarda el archivo con extension .sh
+3. Ejecuta desde la consola con el comando: source file_name.sh
+4. Listo!, Cada vez que quieras levantar el servidor de Flask solo haz el paso 3
+
+## Request y Response
+
+Flask provee varios tipos de variables que nos brindan el contexto de nuestra aplicación una de ellas es request.
+
+Para ello primero debemos de import request de Flask.
+
+El objeto request tiene varias funciones, una de ellas es detectar la ip en la cual está corriendo la apliación. Esto se define así: `request.remote_addr` y el la función así:
+```
+@app.route('/')
+def index():
+    user_ip = request.remote_addr
+    return f"Hola Mundo flask, tu IP es: {user_ip}"
+```
+## Ciclos de Request y Response
+
+Request-Response: es uno de los métodos básicos que usan las computadoras para comunicarse entre sí, en el que la primera computadora envía una solicitud de algunos datos y la segunda responde a la solicitud.
+
+Por lo general, hay una serie de intercambios de este tipo hasta que se envía el mensaje completo.
+
+**Por ejemplo**: navegar por una página web es un ejemplo de comunicación de *request-response*.
+
+*Request-response* se puede ver como una llamada telefónica, en la que se llama a alguien y responde a la llamada; es decir hacemos una petición y recibimos una respuesta.
+
+---
+En nuestro codigo creamos una nueva ruta que va a ser la raiz, con la función `index`, y la función hello va a tener la ruta `/hello`
+
+En la funcion index, creamos una respuesta con la ip y la guardamos en una cookie así:
+```
+@app.route('/')
+def index():
+
+    user_ip = request.remote_addr
+    make = redirect('/hello')
+    response = make_response(make)
+    response.set_cookie('user_ip', user_ip)
+
+    return response
+```
+Ahora con la función hello, obtenemos la ip desde la cookie, así :
+```
+@app.route('/hello')
+def hello():    
+
+    mensaje = 'Hola Mundo!!'
+    user_ip = request.cookies.get('user_ip')
+
+    return mensaje + user_ip
+```
+# Uso de templates y archivos estáticos
+## Templates con Jinja 2
+Un templeate -> archivo de HTML -> renderiza informacion: Estatica o DInamica -> por variables -> luego nos muestra en el navegador
+
+Para renderizar un template/plantilla creada con Jinja2 simplemente hay que hacer uso del método render_template.
+
+A este método debemos pasarle el nombre de nuestra template y las variables necesarias para su renderizado como parámetros clave-valor.
+
+Flask buscará las plantillas en el directorio templates de nuestro proyecto. En el sistema de ficheros, este directorio se debe encontrar en el mismo nivel en el que hayamos definido nuestra aplicación. En nuestro caso, la aplicación se encuentra en el fichero hello.py.
+
+Es hora de crear este directorio y añadir las páginas hello.html, La estructura de nuestro proyecto quedaría del siguiente modo:
+```
+Flask-proyect
+|_hello.py
+|_ /templeate
+    |__ hello.html
+```
+Ejemplo archivo hello.py
+```
+from flask import Flask, request, make_response, redirect, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    user_ip = request.remote_addr
+    response = make_response(redirect('/hello_world'))
+    response.set_cookie('user_ip', user_ip)
+
+    return response
+
+@app.route('/hello_world')
+def hello_world():
+    #creamos nueva variable de la ip que detectamos en el browser
+    user_ip = request.cookies.get('user_ip')
+
+    return render_template('hello_world.html', user_ip= user_ip)
+# metodo es render_template con jinja2 y la variable es user_ip.
+```
