@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="Description" content="Extended Description">
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Consumo de APIs</title>
+
+    <!-- Utilizando el CDN de la biblioteca Axios -->
+    <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer src="./main.js"></script>
+
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-bottom: 48px;
+        }
+        img {
+            display: block;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .random-img {
+            width: 400px;
+            height: auto;
+        }
+        button {
+            margin: 16px 0;
+        }
+        .random-cats-sec{
+            width: 400px;
+            height: auto;
+        }
+        .favorites-cats-sec {
+            padding: 25px 25px;
+            border: solid 1px black;
+            border-radius: 25px;
+            width: 400px;
+            height: auto;
+        }
+        .error-app {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gatos App</h1>
+
+        <span class="error-app" id="error"></span>
+
+        <section class="random-cats-sec" id="random-cats">
+            <h2>Gatos Aleatorios</h2>
+        </section>
+        <button id="reload">Recargar</button>
+
+        <section class="favorites-cats-sec" id="favorites-cats">
+            <h2>Gatos Favoritos</h2>
+        </section>
+
+    </div>
+</body>
+
+</html>
